@@ -6,6 +6,14 @@ class Mensagem:
         self.datahora = datahora
         self.texto = texto
 
+    def __dict__(self):
+        return {
+            'de': self.id_remetente,
+            'para': self.id_destinatario,
+            'datahora': self.datahora,
+            'texto': self.texto
+        }
+
     @staticmethod
     def cria(self, dados):
         try:

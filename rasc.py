@@ -12,7 +12,7 @@ data = datetime.now()
 
 data.isoformat()
 
-print(data)
+print(len({1:0}))
 
 
 print('Fim')

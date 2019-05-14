@@ -14,14 +14,12 @@ def monta_mensagem(dados):
         mensagem = None
     return mensagem
 
-def listar():
-    return listar_db()
-
-def listar_por_usuario(id_usuario, info):
+def listar(id_usuario, info):
     usuario = busca_usuario(id_usuario)
     if usuario and usuario.segredo == info.get('segredo'):
-        pass
-    return ''
+        dados_consulta = {"id": usuario.id, "inicio": info.get('inicio'), "fim": info.get('fim')}
+        return listar_db(dados_consulta), None
+    return None, {'status': 403, 'title': 'Senha inválida'}
 
 def nova(dados):
     destinatario = True if busca_usuario(dados['para']) or dados['para']==0 else False

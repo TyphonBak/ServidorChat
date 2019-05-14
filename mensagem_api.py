@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from services.mensagem_service import nova as service_nova
+from services.mensagem_service import nova as service_nova, listar as service_listar
 
 mensagem_app = Blueprint('mensagem_app', __name__)
 
@@ -10,5 +10,7 @@ def nova():
 
 @mensagem_app.route('/msg/<int:id_usuario>', methods=['GET'])
 def listar_por_usuario(id_usuario):
-    print(request.args)
-    return jsonify('Show')
+    mensagens, erro = service_listar(id_usuario, request.args)
+    if erro:
+        return jsonify(erro['title']), erro['status']
+    return jsonify({"mensagens": [msg.__dict__() for msg in mensagens]}), 200

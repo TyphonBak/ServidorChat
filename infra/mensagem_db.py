@@ -1,12 +1,19 @@
 from modules.mensagem import Mensagem
 import sqlite3
 
-def listar():
+def listar(dados_consulta=None):
+
+    query_comp = ' where id_destinatario = 0'
+    if len(dados_consulta)>0:
+        query_comp += ' and id_destinatario = :id' if dados_consulta.get('id') else ''
+        query_comp += ' and id >= :inicio' if dados_consulta.get('inicio') else ''
+        query_comp += ' and id <= :fim' if dados_consulta.get('fim') else ''
+
     conexao = sqlite3.connect('chat.db')
     try:
         cursor = conexao.cursor()
 
-        cursor.execute('select id, id_remetente, id_destinatario, datahora, texto from Mensagem')
+        cursor.execute('select id, id_remetente, id_destinatario, datahora, texto from Mensagem'+query_comp, dados_consulta)
         return [Mensagem.cria_de_tupla(al) for al in cursor.fetchall()]
     except Exception as e:
         print(e)
