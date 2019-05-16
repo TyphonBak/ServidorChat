@@ -23,7 +23,6 @@ def buscar(id_usuario, segredo=None):
         return Usuario.cria_de_tupla(cursor.fetchone())
     except Exception as e:
         print(e)
-        return None
     finally:
         conexao.close()
 

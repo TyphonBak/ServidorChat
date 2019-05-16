@@ -23,11 +23,12 @@ class Usuario:
 
     @staticmethod
     def cria_de_tupla(dados):
-        print(dados)
         try:
             id = dados[0]
             nome = dados[1]
             return Usuario(nome, id=id), None
+        except TypeError as te:
+            return None, 'Usuario não encontrado'
         except Exception as e:
             print(e)
             return None, e
