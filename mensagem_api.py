@@ -6,7 +6,11 @@ mensagem_app = Blueprint('mensagem_app', __name__)
 @mensagem_app.route('/msg', methods=['POST'])
 def nova():
     res = request.get_json()
-    service_nova(res)
+    retorno, erro = service_nova(res)
+    if erro:
+        return jsonify(erro['title']), erro['status']
+    if retorno:
+        return jsonify(retorno)
 
 @mensagem_app.route('/msg/<int:id_usuario>', methods=['GET'])
 def listar_por_usuario(id_usuario):

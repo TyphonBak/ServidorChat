@@ -15,7 +15,7 @@ class Mensagem:
         }
 
     @staticmethod
-    def cria(self, dados):
+    def cria(dados):
         try:
             id_remetente = dados['id_remetente']
             id_destinatario = dados['id_destinatario']
@@ -26,7 +26,7 @@ class Mensagem:
             print(e)
 
     @staticmethod
-    def cria_de_tupla(self, dados):
+    def cria_de_tupla(dados):
         try:
             id = dados[0]
             id_remetente = dados[1]
@@ -36,19 +36,3 @@ class Mensagem:
             return Mensagem(id_remetente, id_destinatario, datahora, texto, id=id)
         except Exception as e:
             print(e)
-        
-
-
-'''
-{
-"de": <int>,
-"para": <int>,
-"segredo": <str>,
-"texto": <str>
-}
-Id da mensagem: int;
-id do remetente: int;
-id do destinatário: int; - pode ser 0, para indicar que a mensagem é visível a todos.
-data/hora: str - use a biblioteca datetime para validar isso;
-texto: str
-'''
